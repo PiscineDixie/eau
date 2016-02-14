@@ -1,0 +1,36 @@
+<h1>Les données du <%=@journee.date-%></h1>
+
+<!-- partial template pour afficher une journee -->
+
+<div class="mes-form">
+  <!-- 
+    Afficher toutes les valeurs.
+  -->
+  <% Mesure::Indicateurs.each do |indic| %>
+  <% mesureIdx = 0 %>
+    <h2 class="indic"><%= indic.tr('_', ' ') %></h2>
+    <table>
+      <tr>
+        <% for @mesure in @journee.mesures %>
+          <% if @mesure.indicateur == indic %>
+             <td class="heure"><%= @mesure.to_heure_s %></td>
+             <td class="valeur"><%= text_field_tag("", @mesure.valeur, :readonly => true, :size => 5, :class => 'mesureVal', :title => @mesure.auteur) %></td>
+          <% end -%>
+        <% end -%>
+      </tr>
+    </table>
+  <% end %>
+
+  <br/>
+  
+  <div id="auteurs">
+    <label>Auteurs:</label>
+    <span><%= @journee.auteurs %></span> (Placez la souris sur une valeur pour en voir l'auteur.)
+  <div>
+  <br/>
+  
+</div>
+<%= link_to 'Modifier', edit_journee_path(@journee) %> |
+<%= link_to 'Enlever', journee_path(@journee), :confirm => 'Etes vous certain?', :method => :delete %></td>
+<%= link_to 'Retour', journees_path %>
+          

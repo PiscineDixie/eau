@@ -1,0 +1,27 @@
+
+<% rowCnt = 0 %>
+<table>
+<% @registre.data.each do |row| %>
+  <!-- Afficher le header regulierement -->
+  <% if rowCnt.modulo(40) == 0 %>
+    </table>
+    <h2>Registre <%=params[:annee]-%></h2>
+    <b>Piscine:</b> <%= Piscine::Nom -%><br/>
+    <b>Adresse:</b> <%= Piscine::Adresse-%><br/><br/>
+    <table class="registre"><tr>
+    <% @registre.header.each do |c| %>
+      <th><%=c%></th>
+    <% end %>
+    </tr>
+    <% rowCnt = 1 %>
+  <% end %>
+  
+  <!-- Afficher les donnees -->
+  <% rowCnt = rowCnt + 1 %>
+  <tr>
+  <% row.each do |v| %>
+    <td><%= v %></td>
+  <% end %>
+  </tr>
+<% end %>
+</table>

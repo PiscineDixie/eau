@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Eau <%= controller.action_name %></title>
+  <%= stylesheet_link_tag    "application", :media => "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <script src="//apis.google.com/js/client:plus.js"></script>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  
+  <div id="banner">
+    <%= image_tag("logo112x87.png") %>
+    <%= @page_title || "Qualité de l'eau"%>
+  </div>
+  
+  <div id="columns" class="container-fluid">
+    <div class="row">
+    <div class="col-md-2" id="side">
+      <% if cookies[:user] and User.find_by_id(cookies[:user]) %>
+        <p>
+        <%= link_to "Logout " + User.sessionUserId(cookies[:user]), signout_path, id: "sign_out" %>
+        </p>
+        <p>
+        <%= link_to "Enregistrer une journée", :controller => '/journees', :action => :new %>
+        </p>
+        <p>
+        <%= link_to  "Consulter statistiques", :controller => '/journees', :action => :index %>
+        </p>
+        <p>
+        <%= link_to  "Graphiques courants",    url_for('/graphiques/show') %>
+        </p>
+        <p>
+        <%= link_to  "Graphique particulier",  :controller => '/graphiques', :action => :select %>
+        </p>
+        <p>
+        <%= link_to  "Rapports",  :controller => '/rapports', :action => :index %>
+        </p>
+        <p>
+        <%= link_to  "Registre de l'année",    url_for('/registre') %>
+        </p>
+        <% if (User.hasAdminPriviledge(cookies[:user])) %>
+          <p>
+          <%= link_to  "Usagers",    :controller => '/users' %>
+          </p>
+        <% end %>
+        <p>
+        <%= link_to  "Instructions",           url_for('/') %>
+        </p>
+      <% elsif User.count.zero? %>
+        <p>
+        <%= link_to  "Usagers",    :controller => '/users' %>
+        </p>
+      <% else %>
+        <p>
+        <a href="" id="facebook_signin">Login avec Facebook</a>
+        </p>
+        <p>
+        <a href="" id="google_signin">Login avec Google</a>
+        </p>
+      <% end %>
+    </div>
+    
+    <div class="col-md-10" id="main">
+      <% if flash[:notice] -%>
+        <div id="notice"><%= flash[:notice] %></div>
+      <% end -%>
+
+      <%= yield  %>
+    </div>
+    </div>
+  </div>
+ </body>
+</html>

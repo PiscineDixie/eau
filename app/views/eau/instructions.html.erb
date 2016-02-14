@@ -1,0 +1,67 @@
+<h1>Instructions</h1>
+
+<h2>Entrée des données</h2>
+<p>
+Cette application permet d'enregister pour chaque journée les différentes mesures
+qui doivent être récoltées et enregistrées afin d'assurer une qualité de l'eau propice
+à la baignade dans une piscine. Une description de ces différents indicateurs ainsi 
+que leur méthodologie de mesure sont disponible sur le site Web du gouvernement du Québec.
+</p>  
+
+<p>
+A chaque journée, un opérateur doit inscrire les données récoltées au cours de la journée.
+à l'aide de l'option "Enregistrer une
+journée" située dans la marge de gauche. Après avoir inscrit les mesures de la journée, on fait "Enregister pour
+les archiver dans la base de données.
+</p>
+
+<p>
+Lorsque des données d'une journée sont connues plus tard (e.g., lors du retour de
+l'analyse de laboratoire), la mesure peut être ajoutée en modifiant les données de la journée.
+On choisi tout d'abord "Consulter statistiques" dans la marge de gauche et ensuite le chiffre correspondant
+au jour du mois pour la rangée "année-mois" désirée. Ceci affiche les données préalablement inscrites. On
+passe ensuite en mode "édition" à l'aide du lien "Modifier" situé au bas de la page. Après avoir inscrit
+la mesure, on choisi le bouton "Enregistrer" pour compléter la modifications.
+</p>
+
+<p>
+En sus des mesures requises par le gouvernement, les données récoltées inclue également la température
+extérieur (air). 
+</p>
+
+
+<h2>Registre</h2>
+<p>
+Un rapport de toutes les mesures pour l'année courante peut être généré à l'aide de la fonction 
+"Registre courant" de la marge de gauche. Les registres des autres années peuvent
+être généré avec un URL de la forme:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;/registre/annee<br/>
+où "annee" est remplacé par l'année désirée (e.g., 2007)
+</p>
+
+<p>Le registre est affiché dans un format qui permet l'impression.</p>
+
+<h2>Graphiques</h2>
+<p>
+Des graphiques peuvent être générés pour chacun des indicateurs et pour la période désirée. L'option
+"Graphiques courants" de la marge de gauche génère tous les graphiques pour les deux dernières 
+semaines. L'option "Graphique particulier" permet de choisir le graphique désiré (ou tous) ainsi
+que la période. 
+</p>
+
+<p>
+Pour les mesures devant respectées des normes, le graphique affiche une bande
+bleue pour indiquer la plage permissible ou une ligne rouge pour indiquer la valeur
+maximale tolérée.
+</p>
+
+<p>
+Le générateur de graphique répond aussi au URL selon la forme:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;/graphiques/indicateur/date_de_debut:date_de_fin
+</p>
+<ul>
+  <li>"indicateur" est le nom d'un graphique ou "toutes"</li>
+  <li>La date de début peut être omise; elle prendra la valeur de deux semaines avant la date donnée;</li>
+  <li>Si les deux dates sont omises; les graphiques seront générés pour les deux dernières semaines;</li>
+  <li>Si l'indicateur est omis (et les dates), des graphiques pour tous les indicateurs sont générés;</li>
+</ul>

@@ -1,0 +1,12 @@
+<h1>Journées</h1>
+
+<% @monthly_groups.each do | ym, days | %>
+  <label><b><%=ym-%></b></label>
+  <% days.each do |j| -%>
+     <%= link_to j.date.day.to_s, j %>
+  <% end%>
+  <br/>
+<% end %>
+
+<br/>
+<%= link_to 'Ajouter une journee', new_journee_path %>

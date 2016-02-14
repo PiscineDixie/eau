@@ -1,0 +1,7 @@
+<h1>Graphiques du <%= @depart -%> au <%= @fin -%> </h1>
+
+<% @graphs.each do |g| %>
+  <h2><%= g[0].tr('_',' ') %></h2>
+  <img src="<%=g[1]%>"/>
+<% end %>
+

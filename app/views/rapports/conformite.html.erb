@@ -1,0 +1,18 @@
+<h1>Rapport de conformité</h1>
+
+<p>Plage de temps: <%= @dateRange %></p>
+<p>Indicateur: <%= @indic %>, devait être entre <%= @minV %> et <%= @maxV %> </p>
+<br />
+<p>Durée totale des mesures (sec): <%= @totTime.to_s %></p>
+<p>Durée hors norme (sec): <%= @totBadTime.to_s %></p>
+<p>Taux de conformité: <%= 1.0 - @totBadTime.to_f / @totTime.to_f %></p>
+
+<% if @nonConf.size > 0 %>
+<h2>Périodes non-conformes</h2>
+<table>
+  <tr><th>Début</th><th>Jusqu'à</th><th>Valeur</th></tr>
+  <% @nonConf.each do | currProchVal | %>
+    <tr><td><%= currProchVal[0].localtime %></td><td><%= currProchVal[1].localtime %></td><td><%= currProchVal[2] %></td></tr>
+  <% end %>
+</table>
+<% end %>

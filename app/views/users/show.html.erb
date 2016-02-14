@@ -1,0 +1,17 @@
+<p>
+  <b>Userid:</b>
+  <%=h @user.nom %>
+</p>
+
+<p>
+  <b>Courriel:</b>
+  <%=h @user.courriel %>
+</p>
+<p>
+  <b>Rôle:</b>
+  <%=h @user.roles %>
+</p>
+
+
+<%= link_to 'Modifier', edit_user_path(@user) %> |
+<%= link_to 'Retour', users_path %>

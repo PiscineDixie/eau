@@ -1,0 +1,31 @@
+<h1>Liste des usagers</h1>
+
+<table id="listeUsagers">
+  <thead>
+  <tr>
+    <th>Nom</th>
+    <th>Courriel</th>
+    <th>Rôle</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+
+<% for user in @users %>
+  <tr class="<%= cycle('odd', 'even') %>">
+    <td><%=h user.nom %></td>
+    <td><%=h user.courriel %></td>
+    <td><%=h user.roles %></td>
+    <td><%= link_to 'Afficher', user %></td>
+    <td><%= link_to 'Modifier', edit_user_path(user) %></td>
+    <td><%= link_to 'Enlever', user, :confirm => 'Etes-vous certain?', :method => :delete %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= link_to 'Ajouter un usager', new_user_path %>

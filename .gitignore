@@ -1,0 +1,6 @@
+.metadata
+/log
+/config/database.yml
+/public/assets/
+/vendor/
+/tmp/

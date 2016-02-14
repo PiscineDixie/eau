@@ -1,0 +1,18 @@
+<h1>Sélection de graphiques</h1>
+
+<div>
+<%= form_tag do %>
+<table>
+<tr><td>Date de départ:</td><td> <%= select_date(@depart, :prefix => 'depart') %></td></tr>
+<br>
+<tr><td>Date de fin:</td><td>  <%= select_date(@fin, :prefix => 'fin') %></td></tr>
+<br>
+<tr><td>Indicateur:</td><td>  <%= select_tag('indic', options_for_select(["toutes"]+Mesure::Indicateurs, "all"), :class => 'indicVar') %></td></tr>
+</table>
+
+<p>
+  <%= submit_tag("Générer graphique", :class => "submit") %>  
+</p
+
+<% end%>
+</div>
