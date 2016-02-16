@@ -1,23 +1,4 @@
-/*
-body { background-color: #fff; color: #333; }
 
-body, p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size:   13px;
-  line-height: 18px;
-}
-
-pre {
-  background-color: #eee;
-  padding: 10px;
-  font-size: 11px;
-}
-
-a { color: #000; }
-a:visited { color: #666; }
-a:hover { color: #fff; background-color:#000; }
-
-*/
 .fieldWithErrors {
   padding: 2px;
   background-color: red;
@@ -73,57 +54,29 @@ div.progressBar div.background {
   height: 18px;
   width: 0%;
 }
-*/
-/* Styles for main page */
 
-#banner {
-  background: #9c9;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid;
-  font: small-caps 40px/40px "Times New Roman", Times, serif;
-  color: #282;
-  text-align: center;
-  height: 90px;
-}
-/*
-#banner img {
-  float: left;
-}
-
-#columns {
-  background: #141;
-}
-
-#main {
-  margin-left: 9em;
-  padding-top: 4ex;
-  padding-left: 2em;
-  background: white;
-}
-
-#side {
-  float: left;
-  padding-top: 1em;
-  padding-left: 1em;
-  padding-bottom: 1em;
-  width: 8em;
-  background: #141;
-}
-
-#side a {
-  color: #ffffff;
-  font-size: inherit;
-  text-decoration: none;
-  margin-bottom: 2em;
-}
-*/
 #notice {
   border: 2px solid red;
   padding: 1em;
   margin-bottom: 2em;
   background-color: #f0f0f0;
   font: bold smaller sans-serif;
+}
+
+/* page header */
+.page-header {
+  background-color: #428bca;
+  padding-top: 20px;
+  margin-top: 0;
+}
+
+.page-header h1 {
+  padding-right: 20px;
+  color: white;
+}
+
+#columns h1 {
+  font-size: 28px;
 }
 
 /* Attributes for the form used when entering measurements */
@@ -153,8 +106,17 @@ div#auteurs label {
 }
 
 div#auteurs span {
-  
 }
+
+/* Liste des journees */
+.journees label {
+  padding-right: 10px;
+}
+.journees .journee {
+  padding-right: 5px;
+  font-size: larger;
+}
+
 
 /* Attributes for the form when selecting a graph */
 .graph-form td {
@@ -178,4 +140,8 @@ div#auteurs span {
 
 .registre th {
   text-align: center;
+}
+
+.footer {
+  margin-top: 40px;
 }

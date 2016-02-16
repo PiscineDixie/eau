@@ -4,15 +4,22 @@
 <h2>Taux de conformité</h2>
 <div>
 <%= form_tag :action => 'conformite' do %>
-<table>
-<tr><td>Date de départ:</td><td> <%= select_date(Date.today(), :prefix => 'depart') %></td></tr>
-<br>
-<tr><td>Date de fin:</td><td>  <%= select_date(Date.today(), :prefix => 'fin') %></td></tr>
-<br>
-<tr><td>Indicateur:</td><td>  <%= select_tag('indic', options_for_select(Mesure::Indicateurs), :class => 'indicVar') %></td></tr>
-</table>
+<div class="form-group">
+ <label>Date de départ:</label>
+ <%= text_field_tag('depart', Date.today(), type: 'date') %>
+</div>
 
-<p><%= submit_tag("Générer rapport", :class => "submit") %> </p>
+  <div class="form-group">
+   <label>Date de fin:</label>
+   <%= text_field_tag('fin', Date.today(), type: 'date') %>
+</div>
+   
+  <div class="form-group">
+     <label>Indicateur:</label>
+     <%= select_tag('indic', options_for_select(Mesure::Indicateurs), :class => 'indicVar') %>
+</div>
+
+<%= submit_tag("Générer rapport", :class => "btn btn-primary submit") %>
 
 <% end%>
 </div>

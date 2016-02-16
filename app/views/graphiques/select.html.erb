@@ -1,17 +1,25 @@
 <h1>Sélection de graphiques</h1>
 
 <div>
-<%= form_tag do %>
-<table>
-<tr><td>Date de départ:</td><td> <%= select_date(@depart, :prefix => 'depart') %></td></tr>
-<br>
-<tr><td>Date de fin:</td><td>  <%= select_date(@fin, :prefix => 'fin') %></td></tr>
-<br>
-<tr><td>Indicateur:</td><td>  <%= select_tag('indic', options_for_select(["toutes"]+Mesure::Indicateurs, "all"), :class => 'indicVar') %></td></tr>
-</table>
+<%= form_tag( {}, { class: "form-horizontal"} ) do %>
+
+<div class="form-group">
+<label class="col-sm-1 col-xs-2">Date de départ:</label>
+<div class="col-sm-10"><%= text_field_tag('depart', @depart, type: 'date') %></div>
+</div>
+
+<div class="form-group">
+<label class="col-sm-1 col-xs-2">Date de fin:</label>
+<div class="col-sm-10"><%= text_field_tag('fin', @fin, type: 'date') %></div>
+</div>
+
+<div class="form-group">
+<label class="col-sm-1 col-xs-2">Indicateur:</label>
+<div class="col-sm-10"><%= select_tag('indic', options_for_select(["toutes"]+Mesure::Indicateurs, "all"), :class => 'indicVar') %></div>
+</div>
 
 <p>
-  <%= submit_tag("Générer graphique", :class => "submit") %>  
+  <%= submit_tag("Générer graphique", :class => "submit btn btn-primary") %>  
 </p
 
 <% end%>

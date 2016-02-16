@@ -15,13 +15,14 @@ function updateAutresHeuresEH(event) {
   
   // Modifier tous les autres qui n'ont pas encore de valeurs de lecture
   $("select.heureVar").each(function(idx) {
-    var selTdElem = $(this).parent("td.heure");
+    var $sel = $(this);
+    var lblE = $sel.parent(".heure");
     // Find the next value field. Its up one element, down to next
-    var valTdElem = selTdElem.next("td.valeur");
-    var lecture = valTdElem.children("input.mesureVal").first().val();
+    var inpVal = lblE.next(".mesureVal");
+    var lecture = inpVal.val();
     // Si pas de lecture, on modifie la valeur du selecteur
     if (!lecture)
-      $(this).val(heure);
+      $sel.val(heure);
   });
 }
 
@@ -38,12 +39,5 @@ function filterExisting(date) {
 }
 
 $(document).ready(function() {
-  // Activer le datepicker si présent (lors de l'édition d'une journée)
-  $("input.datepicker").datepicker({
-    maxDate: "0D",
-     dateFormat: "yy-mm-dd",
-     beforeShowDay: filterExisting
-   });
-     
   $("select.heureVar").on("change", updateAutresHeuresEH);
 });

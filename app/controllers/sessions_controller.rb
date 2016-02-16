@@ -9,22 +9,22 @@ class SessionsController < ApplicationController
     if user.nil?
       flash[:notice] = "Accès refusé à #{auth.info.email}."
     else
-      cookies[:user] = {:value  => user.id, :expires => 15.minutes.from_now }
+      session[:user] = user.id
       flash[:notice] = "Accès accordé à #{user.courriel} avec le role #{user.roles}."
     end
     redirect_to root_url
   end
 
   def reject
-    provider = params[:provider]
+    reset_session
     msg = params[:msg]
     flash[:notice] = "Accès refusé: #{msg}"
     redirect_to root_url
   end
 
   def destroy
+    reset_session
     flash[:notice] = "Logout complété."
-    cookies.delete(:user)
     redirect_to root_url
   end
   

@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   def authenticate
-    unless cookies[:user]
+    unless session[:user]
       redirect_to(root_url)
       return false
     end
@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   
   def check_admin
     # Verifie que l'usager a le droit d'utiliser ce module
-    unless cookies[:user] and User.hasAdminPriviledge(cookies[:user])
+    unless session[:user] and User.hasAdminPriviledge(session[:user])
       flash[:notice] = "Vous n'avez pas le niveau de privilège suffisant pour ces opérations."
       redirect_to(root_url)
       return false;
@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   
   def check_su
     # Verifie que l'usager a le droit d'utiliser ce module
-    unless cookies[:user] and User.hasSuperUserPriviledge(cookies[:user])
+    unless session[:user] and User.hasSuperUserPriviledge(session[:user])
       flash[:notice] = "Vous n'avez pas le niveau de privilège suffisant pour ces opérations."
       redirect_to(root_url)
       return false;

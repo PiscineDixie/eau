@@ -1,6 +1,13 @@
 <h1>Les données du <%=@journee.date-%></h1>
 
-<!-- partial template pour afficher une journee -->
+<nav class="navbar navbar-default">
+<ul class="nav navbar-nav">
+<li><%= link_to 'Modifier', edit_journee_path(@journee) %></li>
+<% if (User.hasAdminPriviledge(session[:user])) %>   
+<li><%= link_to 'Enlever', journee_path(@journee), data: {confirm: 'Etes vous certain?'}, method: :delete %></td></li>
+<% end %>
+</ul>
+</nav>
 
 <div class="mes-form">
   <!-- 
@@ -8,17 +15,25 @@
   -->
   <% Mesure::Indicateurs.each do |indic| %>
   <% mesureIdx = 0 %>
-    <h2 class="indic"><%= indic.tr('_', ' ') %></h2>
-    <table>
-      <tr>
-        <% for @mesure in @journee.mesures %>
-          <% if @mesure.indicateur == indic %>
-             <td class="heure"><%= @mesure.to_heure_s %></td>
-             <td class="valeur"><%= text_field_tag("", @mesure.valeur, :readonly => true, :size => 5, :class => 'mesureVal', :title => @mesure.auteur) %></td>
+    <div class="panel panel-default">
+    <div class="panel-heading"><div class="panel-title"><h2 class="indic"><%= indic.tr('_', ' ') %></h2></div></div>
+    <div class="panel-body">
+        <div class="form-inline">
+         <div class="row">
+          <% for @mesure in @journee.mesures %>
+            <% if @mesure.indicateur == indic %>
+             <div class="col-xs-2 col-sm-2 col-lg-1">
+              <div class="form-group">
+               <label><%= @mesure.to_heure_s %>:</label>
+               <p class="form-control-static" title="<%= @mesure.auteur %>"><%= @mesure.valeur %></p>
+              </div>
+             </div>
+            <% end -%>
           <% end -%>
-        <% end -%>
-      </tr>
-    </table>
+        </div>
+       </div>
+    </div>
+   </div>
   <% end %>
 
   <br/>
@@ -30,7 +45,4 @@
   <br/>
   
 </div>
-<%= link_to 'Modifier', edit_journee_path(@journee) %> |
-<%= link_to 'Enlever', journee_path(@journee), :confirm => 'Etes vous certain?', :method => :delete %></td>
-<%= link_to 'Retour', journees_path %>
           

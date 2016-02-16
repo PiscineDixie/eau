@@ -5,24 +5,23 @@
     <p><%= msg %></p>
   <% end %>  <p>
       
-  <p>
-    <b>Nom</b><br />
-    <%= f.text_field :nom, :width => 10 %>
-  </p>
+  <div class="form-group">
+      <label>Nom</label>
+    <%= f.text_field :nom, class: 'form-control' %>
+  </div>
 
-  <p>
-    <b>Courriel</b><br />
-    <%= f.text_field :courriel, :width => 10 %>
-  </p>
+  <div class="form-group">
+      <label>Courriel</label>
+    <%= f.text_field :courriel, class: 'form-control' %>
+  </div>
     
-  <p>
-    <b>Rôle</b><br />
-    <select id="user_roles" name="user[roles]">
+  <div class="form-group">
+      <label>Rôle</label>
+    <select id="user_roles" name="user[roles]" class="form-control" >
     <%= options_for_select(User::Roles, @user.roles)  %>
     </select>
-  </p>
+  </div>
 
-  <p>
-    <%= f.submit button_name %>
-  </p>
+    <%= f.submit button_name, class: "btn btn-primary" %>
+    <%= f.submit( 'Annuler', {name: 'cancel', class: "btn btn-default"}) %>
 <% end %>

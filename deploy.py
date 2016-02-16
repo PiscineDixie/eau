@@ -10,9 +10,9 @@ def backup():
     fabric.api.run("cp -a /var/www/eau /var/www/eau-prev")
     
 def deploy():
-    fabric.api.local("rsync -a --copy-links --delete eau %s@%s:/var/www/." % (fabric.api.env.user, fabric.api.env.host))
+    fabric.api.local("rsync -a --copy-links --delete . %s@%s:/var/www/eau/." % (fabric.api.env.user, fabric.api.env.host))
     with fabric.api.cd("/var/www/eau"):
-      fabric.api.run("bundle install")
+      fabric.api.run("bundle install --deployment --path vendor/bundle")
       fabric.api.run("RAILS_ENV=production rake db:migrate")
     fabric.api.run("chown -R www-data.www-data /var/www/eau")
     fabric.api.run("apache2ctl graceful")

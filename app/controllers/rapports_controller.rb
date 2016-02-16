@@ -66,7 +66,7 @@ class RapportsController < ApplicationController
   # Utilitaire pour recuperer une date d'un hash de params
   def readDate(var)
     byebug
-    return Date.new(var[:year].to_i,var[:month].to_i, var[:day].to_i)
+    return Date.parse(var)
   end
 
 end

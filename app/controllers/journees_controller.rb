@@ -50,8 +50,13 @@ class JourneesController < ApplicationController
   # POST /journees
   # POST /journees.xml
   def create
+    if (params[:cancel])
+      redirect_to(journees_url)
+      return;
+    end
+    
     @journee = Journee.new(journee_params(params))
-    ok = @journee.mesuresFromForm(params, cookies[:user])
+    ok = @journee.mesuresFromForm(params, session[:user])
 
     respond_to do |format|
       if ok and @journee.save
@@ -73,7 +78,12 @@ class JourneesController < ApplicationController
   # PUT /journees/1
   def update
     @journee = Journee.find(params[:id])
-    if @journee.mesuresFromForm(params, cookies[:user]) and @journee.save
+    if (params[:cancel])
+      redirect_to(@journee);
+      return;
+    end
+    
+    if @journee.mesuresFromForm(params, session[:user]) and @journee.save
       if @journee.flash_msg.nil?
         flash[:notice] = 'Données mises à jour pour la journée.'
       else
