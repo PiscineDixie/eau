@@ -1,29 +1,30 @@
 <h1>Liste des usagers</h1>
 
 <nav class="navbar">
-<ul class="nav navbar-nav">
-<li><%= button_to 'Ajouter un usager', new_user_path, {method: :get, class: "btn btn-primary"} %></li>
-</ul>
+  <ul class="nav navbar-nav">
+    <li>
+      <%= button_to 'Ajouter un usager', new_user_path, {method: :get, class: "btn btn-primary"} %>
+    </li>
+  </ul>
 </nav>
 
 <table class="table table-hover">
   <thead>
-  <tr>
-    <th>Nom</th>
-    <th>Courriel</th>
-    <th>Rôle</th>
-  </tr>
+    <tr>
+      <th>Nom</th>
+      <th>Courriel</th>
+      <th>Rôle</th>
+    </tr>
   </thead>
   <tbody>
 
-<% for user in @users %>
-  <tr>
-    <td><%= link_to user.nom, user %></td>
-    <td><%=h user.courriel %></td>
-    <td><%=h user.roles %></td>
-  </tr>
-<% end %>
-</tbody>
+    <% for user in @users %>
+    <tr>
+      <td><%= link_to user.nom, user %></td>
+      <td><%= h user.courriel %></td>
+      <td><%= h user.roles %></td>
+    </tr>
+    <% end %>
+  </tbody>
 </table>
-
 

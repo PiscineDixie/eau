@@ -1,18 +1,20 @@
 <h1>Journées</h1>
 
 <nav class="navbar">
-<ul class="nav navbar-nav">
-<li><%= button_to 'Ajouter une journée', new_journee_path, {method: :get, class: 'btn btn-primary navbar-btn'} %></li>
-</ul>
+  <ul class="nav navbar-nav">
+    <li>
+      <%= button_to 'Ajouter une journée', new_journee_path, {method: :get, class: 'btn btn-primary navbar-btn'} %>
+    </li>
+  </ul>
 </nav>
 
 <div class="journees">
   <% @monthly_groups.each do | ym, days | %>
-    <label><b><%=ym-%></b></label>
-    <% days.each do |j| -%>
-       <%= link_to j.date.day.to_s, j, class: "journee" %>
-    <% end%>
-    <br/>
+  <label><b><%= ym-%></b></label>
+  <% days.each do |j| -%>
+  <%= link_to j.date.day.to_s, j, class: "journee" %>
+  <% end%>
+  <br/>
   <% end %>
 </div>
 

@@ -1,27 +1,28 @@
-
 <%= form_for(@user) do |f| %>
 
-  <%  @user .errors.full_messages.each do |msg| %>
-    <p><%= msg %></p>
-  <% end %>  <p>
-      
-  <div class="form-group">
-      <label>Nom</label>
-    <%= f.text_field :nom, class: 'form-control' %>
-  </div>
+<%  @user .errors.full_messages.each do |msg| %>
+<p>
+  <%= msg %>
+</p>
+<% end %>
 
-  <div class="form-group">
-      <label>Courriel</label>
-    <%= f.text_field :courriel, class: 'form-control' %>
-  </div>
-    
-  <div class="form-group">
-      <label>Rôle</label>
-    <select id="user_roles" name="user[roles]" class="form-control" >
+<div class="form-group">
+  <label>Nom</label>
+  <%= f.text_field :nom, class: 'form-control' %>
+</div>
+
+<div class="form-group">
+  <label>Courriel</label>
+  <%= f.text_field :courriel, class: 'form-control' %>
+</div>
+
+<div class="form-group">
+  <label>Rôle</label>
+  <select id="user_roles" name="user[roles]" class="form-control" >
     <%= options_for_select(User::Roles, @user.roles)  %>
-    </select>
-  </div>
+  </select>
+</div>
 
-    <%= f.submit button_name, class: "btn btn-primary" %>
-    <%= f.submit( 'Annuler', {name: 'cancel', class: "btn btn-default"}) %>
+<%= f.submit button_name, class: "btn btn-primary" %>
+<%= f.submit( 'Annuler', {name: 'cancel', class: "btn btn-default"}) %>
 <% end %>

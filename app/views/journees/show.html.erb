@@ -1,48 +1,55 @@
-<h1>Les données du <%=@journee.date-%></h1>
+<h1>Les données du <%= @journee.date-%></h1>
 
 <nav class="navbar navbar-default">
-<ul class="nav navbar-nav">
-<li><%= link_to 'Modifier', edit_journee_path(@journee) %></li>
-<% if (User.hasAdminPriviledge(session[:user])) %>   
-<li><%= link_to 'Enlever', journee_path(@journee), data: {confirm: 'Etes vous certain?'}, method: :delete %></td></li>
-<% end %>
-</ul>
+  <ul class="nav navbar-nav">
+    <li>
+      <%= link_to 'Modifier', edit_journee_path(@journee) %>
+    </li>
+    <% if (User.hasAdminPriviledge(session[:user])) %>
+    <li>
+      <%= link_to 'Enlever', journee_path(@journee), data: {confirm: 'Etes vous certain?'}, method: :delete %></td>
+    </li>
+    <% end %>
+  </ul>
 </nav>
 
 <div class="mes-form">
-  <!-- 
-    Afficher toutes les valeurs.
+  <!--
+  Afficher toutes les valeurs.
   -->
   <% Mesure::Indicateurs.each do |indic| %>
   <% mesureIdx = 0 %>
-    <div class="panel panel-default">
-    <div class="panel-heading"><div class="panel-title"><h2 class="indic"><%= indic.tr('_', ' ') %></h2></div></div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title">
+        <h2 class="indic"><%= indic.tr('_', ' ') %></h2>
+      </div>
+    </div>
     <div class="panel-body">
-        <div class="form-inline">
-         <div class="row">
+      <div class="form-inline">
+        <div class="row">
           <% for @mesure in @journee.mesures %>
-            <% if @mesure.indicateur == indic %>
-             <div class="col-xs-2 col-sm-2 col-lg-1">
-              <div class="form-group">
-               <label><%= @mesure.to_heure_s %>:</label>
-               <p class="form-control-static" title="<%= @mesure.auteur %>"><%= @mesure.valeur %></p>
-              </div>
-             </div>
-            <% end -%>
+          <% if @mesure.indicateur == indic %>
+          <div class="col-xs-2 col-sm-2 col-lg-1">
+            <div class="form-group">
+              <label><%= @mesure.to_heure_s %>:</label>
+              <p class="form-control-static" title="<%= @mesure.auteur %>">
+                <%= @mesure.valeur %>
+              </p>
+            </div>
+          </div>
+          <% end -%>
           <% end -%>
         </div>
-       </div>
+      </div>
     </div>
-   </div>
+  </div>
   <% end %>
 
   <br/>
-  
+
   <div id="auteurs">
     <label>Auteurs:</label>
-    <span><%= @journee.auteurs %></span> (Placez la souris sur une valeur pour en voir l'auteur.)
-  <div>
-  <br/>
-  
+    <span><%= @journee.auteurs %></span> (Placez la souris sur une valeur pour en voir l'auteur.)   
+  </div>
 </div>
-          

@@ -1,23 +1,33 @@
 <h1><%= @user.nom %></h1>
 
 <nav class="navbar navbar-default">
-<ul class="nav navbar-nav">
-<li><%= link_to 'Modifier', edit_user_path(@user) %></li>
-<li><%= link_to 'Enlever', user_path(@user), data: {confirm: 'Etes vous certain?'}, method: :delete %></td></li>
-</ul>
+  <ul class="nav navbar-nav">
+    <li>
+      <%= link_to 'Modifier', edit_user_path(@user) %>
+    </li>
+    <li>
+      <%= link_to 'Enlever', user_path(@user), data: {confirm: 'Etes vous certain?'}, method: :delete %></td>
+    </li>
+  </ul>
 </nav>
 
 <div class="form-group">
-    <label>Userid</label>
-<p class="form-control-static"><%=h @user.nom %></p>
+  <label>Userid</label>
+  <p class="form-control-static">
+    <%= h @user.nom %>
+  </p>
 </div>
 
 <div class="form-group">
-    <label>Courriel</label>
-<p class="form-control-static"><%=h @user.courriel %></p>
+  <label>Courriel</label>
+  <p class="form-control-static">
+    <%= h @user.courriel %>
+  </p>
 </div>
 
 <div class="form-group">
-    <label>Rôle</label>
-<p class="form-control-static"><%=h @user.roles %></p>
+  <label>Rôle</label>
+  <p class="form-control-static">
+    <%= h @user.roles %>
+  </p>
 </div>
