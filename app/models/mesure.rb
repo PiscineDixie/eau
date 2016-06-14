@@ -13,6 +13,9 @@ class Mesure < ActiveRecord::Base
   # Indicateurs non mesurees a la piscine
   IndicateursLab = %w(Chloramines Alcalinité Turbidité Coliformes)
   
+  # Indicateurs editables
+  IndicateursEdit = Indicateurs - ['Chloramines']
+  
   # Liste des plages de respect des normes pour chaque indicateur
   #  "indicateur", "unite de mesure", "min regl", "max regl", 
   IndicateursGraphData = [

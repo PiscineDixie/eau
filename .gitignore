@@ -1,7 +1,9 @@
 .metadata
 /log
 /config/database.yml
+/config/secrets.yml
 /public/assets/
 /vendor/
 /tmp/
+/deploy.pyc
 /.byebug_history

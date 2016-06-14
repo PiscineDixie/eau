@@ -2,20 +2,27 @@
 
 <h2>Taux de conformité</h2>
 <div>
-  <%= form_tag :action => 'conformite' do %>
+  <%= form_tag({:action => 'conformite'}, { class: "form-horizontal"} ) do %>
+  
   <div class="form-group">
-    <label>Date de départ:</label>
-    <%= text_field_tag('depart', Date.today(), type: 'date') %>
+    <label class="control-label col-sm-2 col-xs-2">Date de départ:</label>
+    <div class="col-sm-2">
+      <%= text_field_tag('depart', @depart, type: 'date') %>
+    </div>
   </div>
 
   <div class="form-group">
-    <label>Date de fin:</label>
-    <%= text_field_tag('fin', Date.today(), type: 'date') %>
+    <label class="control-label col-sm-2 col-xs-2">Date de fin:</label>
+    <div class="col-sm-2">
+      <%= text_field_tag('fin', @fin, type: 'date') %>
+    </div>
   </div>
 
   <div class="form-group">
-    <label>Indicateur:</label>
-    <%= select_tag('indic', options_for_select(Mesure::Indicateurs), :class => 'indicVar') %>
+    <label class="control-label col-sm-2 col-xs-2">Indicateur:</label>
+    <div class="col-sm-2">
+      <%= select_tag('indic', options_for_select(Mesure::Indicateurs), :class => 'form-control indicVar') %>
+    </div>
   </div>
 
   <%= submit_tag("Générer rapport", :class => "btn btn-primary submit") %>

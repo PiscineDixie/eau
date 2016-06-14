@@ -1,13 +1,13 @@
 <h1>Les données du <%= @journee.date-%></h1>
 
-<nav class="navbar navbar-default">
+<nav class="navbar">
   <ul class="nav navbar-nav">
     <li>
-      <%= link_to 'Modifier', edit_journee_path(@journee) %>
+      <%= button_to('Modifier', edit_journee_path(@journee), {method: :get, class: "btn btn-primary navbar-btn"}) %>
     </li>
     <% if (User.hasAdminPriviledge(session[:user])) %>
-    <li>
-      <%= link_to 'Enlever', journee_path(@journee), data: {confirm: 'Etes vous certain?'}, method: :delete %></td>
+    <li style="margin-left:20px;">
+      <%= button_to('Enlever', journee_path(@journee), {data: {confirm: 'Etes vous certain?'}, method: :delete, class: "btn btn-danger navbar-btn"}) %></td>
     </li>
     <% end %>
   </ul>

@@ -8,47 +8,52 @@
 
 <div>
 <%= form_for(@journee, html: {class: "form-inline"}) do |f| %>
- <%= f.error_messages %>
-  <!-- La date n'est modifiable que lors de la creation afin d'eviter
-       des problemes -->
-    <% if params[:action] == "new" %>
-      <div class="form-group">
-       <label>Journée:</label>
-       <input class="form-control" type="date" name="journee[date]", value="<%= @journee.date.to_s(:db) %>" max="<%= Date.today.to_s %>" >
-      </div>
-    <% end %>
+  <%= f.error_messages %>
+  
+  <!-- La date n'est modifiable que lors de la creation afin d'eviter des problemes -->
+  <% if params[:action] == "new" %>
+    <div class="form-group">
+      <label>Journée:</label>
+      <input class="form-control" type="date" name="journee[date]", value="<%= @journee.date.to_s(:db) %>" max="<%= Date.today.to_s %>" >
+    </div>
+  <% end %>
 
   <!-- 
     Afficher toutes les valeurs. Il faut construire un params id
     pour chacune puisque RoR ne le fait pas automatiquement. 
   -->
-  <% Mesure::Indicateurs.each do |indic| %>
-  <% mesureIdx = hrIdx = 0 %>
+  <% Mesure::IndicateursEdit.each do |indic| %>
+    <% mesureIdx = hrIdx = 0 %>
     <% putHeader = true %>
-        <% for mesure in @journee.mesuresSorted %>
-          <% if mesure.indicateur == indic %>
-					  <% if putHeader %>
-						  <% putHeader = false %>
-							<h2 class="indic"><%= indic.tr('_', ' ') %></h2>
-              <div style="margin-top:10px;" class="row">
-						<% end%>
-            <% hrIdx = hrIdx + 1 %>
-            <% if hrIdx.modulo(5) == 0 %>
-              </div><div class="row">
-            <% end %>
-            <div class="col-xs-4 col-sm-3 col-lg-2">
-             <div class="form-group">
-              <label class="heure"><%= select_tag("mesure:"+indic+":"+mesureIdx.to_s+":heure", options_for_select(Mesure::Heures, mesure.to_heure_s), class: 'form-control heureVar') %></label>
-              <%= text_field_tag("mesure:"+indic+":"+mesureIdx.to_s+":valeur", mesure.valeur, size: 5, class: 'form-control mesureVal') %>
-             </div>
-            </div>
-            <% mesureIdx = mesureIdx + 1 %>
-          <% end -%>
-        <% end -%>
+    <% for mesure in @journee.mesuresSorted %>
+      <% if mesure.indicateur == indic %>
+        <% if putHeader %>
+          <% putHeader = false %>
+          <h2 class="indic"><%= indic.tr('_', ' ') %></h2>
+          <div style="margin-top:10px;" class="row">
+        <% end %>
+        
+        <% hrIdx = hrIdx + 1 %>
+        <% if hrIdx.modulo(15) == 0 %>
+          </div><div class="row">
+        <% end %>
+        
+        <div class="col-xs-4 col-sm-3 col-lg-2">
+          <div class="form-group">
+            <label class="heure">
+              <%= select_tag("mesure:"+indic+":"+mesureIdx.to_s+":heure", options_for_select(Mesure::Heures, mesure.to_heure_s), class: 'form-control heureVar') %>
+            </label>
+            <%= text_field_tag("mesure:"+indic+":"+mesureIdx.to_s+":valeur", mesure.valeur, size: 5, class: 'form-control mesureVal') %>
+          </div>
         </div>
+        
+        <% mesureIdx = mesureIdx + 1 %>
+      <% end %>
+    <% end %>
+    </div>
   <% end %>
 
-  <br/>
+  <br />
   <% if button_name.length > 0 %>
     <p>
       <%= f.submit button_name, class: "btn btn-primary submit" %>

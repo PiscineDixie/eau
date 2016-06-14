@@ -14,7 +14,7 @@
   Durée hors norme (sec): <%= @totBadTime.to_s %>
 </p>
 <p>
-  Taux de conformité: <%= 1.0 - @totBadTime.to_f / @totTime.to_f %>
+  Taux de conformité: <%= number_to_percentage(100 - 100 * @totBadTime.to_f / @totTime.to_f, precision: 1) %>
 </p>
 
 <% if @nonConf.size > 0 %>

@@ -8,12 +8,14 @@
   </ul>
 </nav>
 
+
 <table class="table table-hover">
   <thead>
     <tr>
       <th>Nom</th>
       <th>Courriel</th>
       <th>Rôle</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -23,6 +25,7 @@
       <td><%= link_to user.nom, user %></td>
       <td><%= h user.courriel %></td>
       <td><%= h user.roles %></td>
+      <td><%= button_to('Enlever', user, {data: {confirm: 'Etes-vous certain?'}, :method => :delete, class: "btn btn-danger btn-xs"}) %></td>
     </tr>
     <% end %>
   </tbody>
