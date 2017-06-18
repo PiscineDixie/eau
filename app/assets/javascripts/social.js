@@ -22,7 +22,7 @@ window.fbAsyncInit = function() {
      /* appId      : '1548975615363971', dev account app */
      appId      : '377502229121424',  /* prod account app */
     xfbml      : false,
-    version    : 'v2.3',
+    version    : 'v2.8',
     cookie     : true
   });
 };
@@ -51,10 +51,11 @@ googleSigninCallback = function(authResult) {
     delete authResult['g-oauth-window'];
     
     $.post('/auth/google_oauth2/callback', authResult)
-    .done(function(data, textStatus, jqXHR) {
-      $('body').html(data);
-      initHandlers();
-    }).fail(function(jqXHR, textStatus) {
+      .done(function(data) {
+        $('body').html(data);
+        socialInitHandlers();
+      })
+    .fail(function(jqXHR, textStatus) {
       alert("Failed auth processing on server. Please contact support. " + textStatus);
     });
   } else if (authResult['error'] == 'user_signed_out') {
@@ -64,7 +65,7 @@ googleSigninCallback = function(authResult) {
   } else {
     $.post('/auth/failure', {provider: 'google', msg: authResult['error']}, function(data) {
       $('body').html(data);
-      initHandlers();
+      socialInitHandlers();
     });
   }
 };  
@@ -79,13 +80,18 @@ socialLogOut = function(event) {
   }
 };
 
+
 facebookSignin = function(event) {
   FB.login(function(response) {
     if (response.status === 'connected') {
       document.cookie="login=fb";
-      $.post('/auth/facebook/callback', null, function(data) {
+      $.post('/auth/facebook/callback', null)
+      .done(function(data) {
         $('body').html(data);
-        initHandlers();
+        socialInitHandlers();
+      })
+      .fail(function(jqXHR, textStatus, errorThrown) {
+         $('body').html(jqXHR.responseText); 
       });
     } else {
       var msg;
@@ -96,7 +102,7 @@ facebookSignin = function(event) {
       }
       $.post('/auth/failure', {provider: 'facebook', msg: msg}, function(data) {
         $('body').html(data);
-        initHandlers();
+        socialInitHandlers();
       });
     }
   }, { scope: 'email'});
@@ -114,12 +120,12 @@ googleSignIn = function(event) {
   event.preventDefault();
 };
 
-initHandlers = function() {
+socialInitHandlers = function() {
   $('#facebook_signin').click(facebookSignin);
   $('#google_signin').click(googleSignIn);
   $('#sign_out').click(socialLogOut);
 };
 
 $(document).ready(function () {
-  initHandlers();
+  socialInitHandlers();
 });

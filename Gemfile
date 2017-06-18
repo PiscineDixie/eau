@@ -14,7 +14,6 @@ gem 'omniauth-google-oauth2'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'yui-compressor'
-gem 'turbolinks'
 gem 'jquery-rails'
 gem "twitter-bootstrap-rails"
 gem 'autoprefixer-rails'
