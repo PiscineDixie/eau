@@ -9,45 +9,46 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150406155639) do
+ActiveRecord::Schema.define(version: 20170629004532) do
 
-  create_table "journee_completes", :force => true do |t|
+  create_table "journee_completes", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "journees", :force => true do |t|
+  create_table "journees", force: :cascade do |t|
     t.date     "date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "journees", ["date"], :name => "index_journees_on_date", :unique => true
+  add_index "journees", ["date"], name: "index_journees_on_date", unique: true, using: :btree
 
-  create_table "mesures", :force => true do |t|
-    t.integer  "journee_id"
-    t.string   "indicateur",                               :default => "", :null => false
-    t.decimal  "valeur",     :precision => 8, :scale => 3,                 :null => false
+  create_table "mesures", force: :cascade do |t|
+    t.integer  "journee_id", limit: 4
+    t.string   "indicateur", limit: 255,                         default: "", null: false
+    t.decimal  "valeur",                 precision: 8, scale: 3,              null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "temps"
-    t.integer  "user_id",                                  :default => 0
+    t.integer  "user_id",    limit: 4,                           default: 0
   end
 
-  create_table "schema_info", :id => false, :force => true do |t|
-    t.integer "version"
+  create_table "schema_info", id: false, force: :cascade do |t|
+    t.integer "version", limit: 4
   end
 
-  create_table "users", :force => true do |t|
-    t.string   "courriel"
-    t.string   "nom"
-    t.string   "roles"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "users", force: :cascade do |t|
+    t.string   "courriel",   limit: 255
+    t.string   "nom",        limit: 255
+    t.string   "roles",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  add_index "users", ["courriel"], :name => "index_users_on_courriel"
+  add_index "users", ["courriel"], name: "index_users_on_courriel", using: :btree
+  add_index "users", ["courriel"], name: "users_unique_courriel", unique: true, using: :btree
 
 end
