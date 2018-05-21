@@ -85,9 +85,10 @@ class Journee < ActiveRecord::Base
   
   # Lire les mesures a partir du contenu de notre page web
   # Chacune des mesure a une clef avec le pattern mesure_indicateur_idx_{heure,valeur}
+  # params is a ActionController::Parameters
   def mesuresFromForm(params, userId)
     # Eliminer tout sauf les mesures de l'input. Ordonner en paires (heure, valeur)
-    parms = params.sort
+    parms = params.to_unsafe_hash.to_a.sort
     parms.delete_if { |x| x[0].match(/^mesure:/).nil?  }
     locTime = Time.local(self.date.year, self.date.month, self.date.mday)
     outOfBound = []
@@ -108,7 +109,6 @@ class Journee < ActiveRecord::Base
           m.save!
         else
           m = Mesure.new(:indicateur => indic, :temps => temps, :valeur => fieldVal, :user_id => userId)
-          return false unless m.valid?
           self.mesures << m
         end
         outOfBound << m unless m.inRange?

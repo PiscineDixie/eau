@@ -1,5 +1,5 @@
 # coding: utf-8
-class CreateMesures < ActiveRecord::Migration
+class CreateMesures < ActiveRecord::Migration[5.0]
   def self.up
     create_table :mesures do |t|
       t.references :journee

@@ -1,4 +1,4 @@
-Eau::Application.routes.draw do
+Rails.application.routes.draw do
   
   resources :journees
   resources :users

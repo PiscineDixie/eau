@@ -43,8 +43,7 @@ class Mesure < ActiveRecord::Base
   #
   # Il y a aussi le lien vers la journee (journee_id)
   
-  validates_presence_of :indicateur, :valeur
-  validates_presence_of :temps
+  validates_presence_of :indicateur, :valeur, :temps
   validates_numericality_of :valeur
   validates_inclusion_of :indicateur, :in => Indicateurs
   

@@ -1,5 +1,5 @@
 # coding: utf-8
-class CreateJournees < ActiveRecord::Migration
+class CreateJournees < ActiveRecord::Migration[5.0]
   def self.up
     create_table :journees do |t|
       t.date :date, :null => false

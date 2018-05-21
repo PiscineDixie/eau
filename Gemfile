@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.2'
+gem 'rails', '~> 5.2'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -10,18 +10,21 @@ gem 'rails-i18n'
 gem 'dynamic_form', '~> 1.1'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
-# gem 'sass-rails'
+gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'yui-compressor'
 gem 'jquery-rails'
 gem "twitter-bootstrap-rails"
 gem 'autoprefixer-rails'
+gem 'bootsnap'
+gem 'therubyracer'
 
 
 group :development do
-  gem 'web-console', '~> 2.0'
+  gem 'web-console'
   gem 'byebug'
+  gem 'listen'
   gem 'capistrano'
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'

@@ -1,5 +1,5 @@
 # coding: utf-8
-class HeureToTime < ActiveRecord::Migration
+class HeureToTime < ActiveRecord::Migration[5.0]
   def up
     add_column :mesures, :temps, :datetime
     Mesure.reset_column_information
