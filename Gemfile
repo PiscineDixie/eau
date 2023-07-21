@@ -1,23 +1,29 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem 'rails', '~> 5.2'
-gem 'mysql2'
+ruby "3.2.2"
+
+# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
+gem "rails", "~> 7.0.6"
 gem 'rails-i18n'
-gem 'dynamic_form', '~> 1.1'
-gem 'omniauth-facebook'
-gem 'omniauth-google-oauth2'
-gem 'sass-rails'
-gem 'uglifier'
+
+# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
+gem "sprockets-rails"
+
+gem 'mysql2'
+
+gem 'google_sign_in'
+gem 'dynamic_form'
+
 gem 'coffee-rails'
-gem 'yui-compressor'
 gem 'jquery-rails'
 gem "twitter-bootstrap-rails"
 gem 'autoprefixer-rails'
 gem 'bootsnap'
-gem 'therubyracer'
-
+gem "sassc-rails"
 
 group :development do
+  gem "puma", "~> 5.0"
   gem 'web-console'
   gem 'byebug'
   gem 'listen'

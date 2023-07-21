@@ -1,5 +1,5 @@
 # coding: utf-8
-class Mesure < ActiveRecord::Base
+class Mesure < ApplicationRecord
   # Liste des indicateurs mesures
   Indicateurs = %w(Température_eau Température_air pH Limpidité Désinfectant_total Désinfectant_résiduel Personnes Chloramines Alcalinité Turbidité Coliformes)
   

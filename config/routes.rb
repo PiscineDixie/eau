@@ -21,8 +21,7 @@ Rails.application.routes.draw do
   post 'rapports/conformite' => 'rapports#conformite'
   get 'rapports' => 'rapports#index'
   
-  post 'auth/:provider/callback', to: 'sessions#create'
-  match 'auth/failure', to: 'sessions#reject', via: [:post, :get]
+  get 'login', to: 'sessions#create', as: :create_login
   get 'signout', to: 'sessions#destroy', as: 'signout'
   
   get '/' => 'eau#instructions'

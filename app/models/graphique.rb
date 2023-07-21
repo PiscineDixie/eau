@@ -112,7 +112,7 @@ class Graphique
       joins('as m inner join journees as j on m.journee_id = j.id').
       select('date, temps, valeur').
       where("indicateur = :indic and date >= :minDate and date <= :endDate", 
-        {:indic => indic, :minDate => @minDate.to_s(:db), :endDate => @maxDate.to_s(:db)})
+        {:indic => indic, :minDate => @minDate.to_formatted_s(:db), :endDate => @maxDate.to_formatted_s(:db)})
     
     # If no data, then no valeurs and no graph
     return if mesures.empty?

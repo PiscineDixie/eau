@@ -24,3 +24,19 @@ def deploy(c):
     c.sudo("systemctl reload httpd")
     c.run("wget http://localhost:8082/ -o /dev/null -O /dev/null")
     pass
+
+@task
+def deploy(c):
+    c.run("rm -rf eau")
+    c.run("git clone https://github.com/PiscineDixie/eau.git")
+    c.local("rsync ./config/secrets.yml %s@%s:eau/config/." % (c.user, c.host))
+    c.run("cd eau && env BUNDLE_DEPLOYMENT=1 BUNDLE_WITHOUT=development bundle install")
+    c.run("cd eau && env RAILS_ENV=production bin/rails assets:precompile")
+    c.run("cd eau && env RAILS_ENV=production bundle exec rake db:migrate")
+    c.run("rm -rf eau/.git")
+    c.sudo("chown -R apache:apache eau")
+    c.sudo("rm -rf /var/www/eau")
+    c.sudo("mv eau /var/www/.")
+    c.sudo("systemctl reload httpd")
+    c.run("wget https://apps.piscinedixiepool:8482/ -o /dev/null -O /dev/null")
+    pass

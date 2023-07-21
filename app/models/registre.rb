@@ -16,7 +16,7 @@ class Registre
        order(:date)
     
     journees.each do |j|
-      @data << [j.date.to_s(:db)]
+      @data << [j.date.to_formatted_s(:db)]
       iv = j.mesuresSorted.group_by { |m| m.indicateur }
       iv.each do |indic, ms|
         @data << ['', indic.tr('_', ' ')]

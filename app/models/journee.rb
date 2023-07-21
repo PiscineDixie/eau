@@ -1,7 +1,7 @@
 # coding: utf-8
 #
 # Cette classe represente une journee. Elle contient plusieurs mesures
-class Journee < ActiveRecord::Base
+class Journee < ApplicationRecord
   
   attr_accessor :flash_msg
   
@@ -168,7 +168,7 @@ class Journee < ActiveRecord::Base
   def self.journeesInfo
     sd = Date.today.at_beginning_of_month
     se = Date.today.at_end_of_month
-    exist = Journee.select('date').where('date >= ? and date <= ?', sd.to_s(:db), se.to_s(:db) )
+    exist = Journee.select('date').where('date >= ? and date <= ?', sd.to_formatted_s(:db), se.to_formatted_s(:db) )
         
     existD = exist.map() {|m| m.date }
    return (sd..se).to_a - existD, existD

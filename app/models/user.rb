@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   
   Roles = %w(base admin su)
   
@@ -6,8 +6,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :courriel
   validates_inclusion_of :roles, :in => User::Roles
   
-  def self.omniauth(auth)
-    courriel = auth.info.email
+  def self.from_courriel(courriel)
     u = User.find_by(courriel: courriel);
     return u unless u.nil?;
     

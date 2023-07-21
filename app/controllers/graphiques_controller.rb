@@ -23,7 +23,7 @@ class GraphiquesController < ApplicationController
     if request.post?
       fin = readDate(params['fin']) if params['fin']
       depart = readDate(params['depart']) if params['depart']
-      dateRange = depart.to_s(:db)+':'+fin.to_s(:db)
+      dateRange = depart.to_formatted_s(:db)+':'+fin.to_formatted_s(:db)
       redirect_to("/graphiques/show/#{params['indic']}/#{dateRange}")
     else
       # Sinon afficher le formulaire pour choisir le graphique

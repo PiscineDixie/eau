@@ -10,7 +10,7 @@ class JourneesController < ApplicationController
   # GET /journees
   # GET /journees.xml
   def index
-    groups = Journee.all.order(:date).group_by { |j| j.date.to_s(:db)[0,7] }
+    groups = Journee.all.order(:date).group_by { |j| j.date.to_formatted_s(:db)[0,7] }
     @monthly_groups = groups.to_a.sort.reverse
   end
 

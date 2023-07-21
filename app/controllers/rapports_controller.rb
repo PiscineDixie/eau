@@ -13,14 +13,14 @@ class RapportsController < ApplicationController
     if request.post?
       fin = readDate(params['fin']) if params['fin']
       depart = readDate(params['depart']) if params['depart']
-      @dateRange = depart.to_s(:db)+':'+fin.to_s(:db)
+      @dateRange = depart.to_formatted_s(:db)+':'+fin.to_formatted_s(:db)
       @indic = params[:indic]
       
       # Obtenir les mesures pour cette plage de la db
       mesures = Mesure.
         joins('as m inner join journees as j on m.journee_id = j.id').
         where("indicateur = :indic and date >= :minDate and date <= :endDate", 
-          {:indic => @indic, :minDate => depart.to_s(:db), :endDate => fin.to_s(:db)}).
+          {:indic => @indic, :minDate => depart.to_formatted_s(:db), :endDate => fin.to_formatted_s(:db)}).
         select('date, temps, valeur').to_a
         
       # Ordonner par par heure d'entree

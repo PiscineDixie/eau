@@ -14,7 +14,7 @@
   <% if params[:action] == "new" %>
     <div class="form-group">
       <label>Journée:</label>
-      <input class="form-control" type="date" name="journee[date]", value="<%= @journee.date.to_s(:db) %>" max="<%= Date.today.to_s %>" >
+      <input class="form-control" type="date" name="journee[date]", value="<%= @journee.date.to_formatted_s(:db) %>" max="<%= Date.today.to_s %>" >
     </div>
   <% end %>
 

@@ -1,7 +1,7 @@
 # coding: utf-8
 # Classe pour les donnees permanente et annuelles d'un employe
 #
-class Employe < ActiveRecord::Base
+class Employe < ApplicationRecord
       
   establish_connection("#{Rails.env}_paie".to_sym)
   
